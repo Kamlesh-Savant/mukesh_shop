@@ -113,6 +113,8 @@
             this.txtDiscPer.TabIndex = 21;
             this.txtDiscPer.Text = "0.00";
             this.txtDiscPer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtDiscPer.TextChanged += new System.EventHandler(this.txtDiscPer_TextChanged);
+            this.txtDiscPer.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyDecimal_KeyPress);
             // 
             // label2
             // 
@@ -214,6 +216,7 @@
             this.txtDiscount.TabIndex = 12;
             this.txtDiscount.Text = "0.00";
             this.txtDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtDiscount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyDecimal_KeyPress);
             // 
             // lblDiscount
             // 

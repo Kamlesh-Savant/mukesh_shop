@@ -88,7 +88,7 @@
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearch.Location = new System.Drawing.Point(13, 56);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(250, 35);
+            this.txtSearch.Size = new System.Drawing.Size(374, 35);
             this.txtSearch.TabIndex = 2;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
@@ -111,7 +111,7 @@
             this.dtpFromDate.CustomFormat = "dd-MMM-yyyy";
             this.dtpFromDate.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFromDate.Location = new System.Drawing.Point(359, 56);
+            this.dtpFromDate.Location = new System.Drawing.Point(489, 59);
             this.dtpFromDate.Name = "dtpFromDate";
             this.dtpFromDate.Size = new System.Drawing.Size(150, 29);
             this.dtpFromDate.TabIndex = 4;
@@ -123,7 +123,7 @@
             this.dtpToDate.CustomFormat = "dd-MMM-yyyy";
             this.dtpToDate.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpToDate.Location = new System.Drawing.Point(559, 56);
+            this.dtpToDate.Location = new System.Drawing.Point(689, 59);
             this.dtpToDate.Name = "dtpToDate";
             this.dtpToDate.Size = new System.Drawing.Size(150, 29);
             this.dtpToDate.TabIndex = 5;
@@ -135,7 +135,7 @@
             this.lblFromDate.AutoSize = true;
             this.lblFromDate.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.lblFromDate.ForeColor = System.Drawing.Color.DimGray;
-            this.lblFromDate.Location = new System.Drawing.Point(270, 60);
+            this.lblFromDate.Location = new System.Drawing.Point(400, 63);
             this.lblFromDate.Name = "lblFromDate";
             this.lblFromDate.Size = new System.Drawing.Size(83, 21);
             this.lblFromDate.TabIndex = 6;
@@ -147,7 +147,7 @@
             this.lblToDate.AutoSize = true;
             this.lblToDate.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.lblToDate.ForeColor = System.Drawing.Color.DimGray;
-            this.lblToDate.Location = new System.Drawing.Point(515, 60);
+            this.lblToDate.Location = new System.Drawing.Point(645, 63);
             this.lblToDate.Name = "lblToDate";
             this.lblToDate.Size = new System.Drawing.Size(32, 21);
             this.lblToDate.TabIndex = 7;

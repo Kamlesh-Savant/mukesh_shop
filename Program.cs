@@ -16,12 +16,23 @@ namespace MukeshShop
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            frmLogin loginForm = new frmLogin();
 
+            if (!LicenseStorage.IsLicenseSaved() || !LicenseManager.ValidateKey(LicenseStorage.LoadLicense()))
+            {
+                frmLicense licenseForm = new frmLicense();
+                if (licenseForm.ShowDialog() != DialogResult.OK)
+                {
+                    MessageBox.Show("Activation required to run the app.");
+                    return;
+                }
+            }
+
+            frmLogin loginForm = new frmLogin();
             if (loginForm.ShowDialog() == DialogResult.OK)
             {
-                Application.Run(new frmDashboard()); // Only runs dashboard if login succeeded
+                Application.Run(new frmDashboard());
             }
         }
+
     }
 }

@@ -94,7 +94,7 @@ namespace MukeshShop
             {
                 g.DrawString(left, hindiFont, Brushes.Black, 10, y);
                 SizeF size = g.MeasureString(right, hindiFont);
-                g.DrawString(right, hindiFont, Brushes.Black, pageWidth - size.Width - 10, y);
+                g.DrawString(right, hindiFont, Brushes.Black, pageWidth - size.Width - 15, y);
                 y += (int)size.Height;
             }
 
@@ -126,7 +126,7 @@ namespace MukeshShop
                 g.DrawString($"{srNo}. {item.Name}", hindiFont, Brushes.Black, 10, y);
                 y += 20;
 
-                string valuesLine = string.Format("{0,12}           {1,10:N2}                 {2,10:N2}", item.Qty, item.Rate, item.Amount);
+                string valuesLine = string.Format("{0,12}           {1,10:N2}             {2,10:N2}", item.Qty, item.Rate, item.Amount);
                 g.DrawString("      "+valuesLine, hindiFont, Brushes.Black, 10, y);
                 y += 20;
                 srNo++;

@@ -437,12 +437,19 @@ namespace MukeshShop
                     else
                     {
                         saleId = SaveSaleHeader(conn, tran);
+                        txtBillNo.Text = saleId.ToString(); // <-- ✅ Assign Bill No here after insert
                     }
 
                     SaveSaleItems(saleId, conn, tran);
                     tran.Commit();
                     MessageBox.Show("Sale saved successfully!");
-                    PrintReceipt();
+
+                    var result = MessageBox.Show("Do you want to print the receipt?", "Print Receipt", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        PrintReceipt(); // <-- Now this will have txtBillNo populated
+                    }
+
                     SaveCompleted?.Invoke(this, EventArgs.Empty);
                     currentSaleId = null;
                 }
@@ -453,6 +460,7 @@ namespace MukeshShop
                 }
             }
         }
+
 
         private void PrintReceipt()
         {
@@ -523,6 +531,43 @@ namespace MukeshShop
             );
 
             printer.Print();
+        }
+
+        private void txtDiscPer_TextChanged(object sender, EventArgs e)
+        {
+            if (decimal.TryParse(txtTotal.Text, out decimal total) &&
+                decimal.TryParse(txtDiscPer.Text, out decimal discPer))
+            {
+                decimal discount = Math.Round((total * discPer) / 100, 2);
+                txtDiscount.Text = discount.ToString("N2");
+            }
+            else
+            {
+                txtDiscount.Text = "0.00";
+            }
+        }
+
+        private void OnlyDecimal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox txt = sender as TextBox;
+
+            // Allow control keys like Backspace
+            if (char.IsControl(e.KeyChar))
+                return;
+
+            // Allow only one decimal point
+            if (e.KeyChar == '.')
+            {
+                if (txt.Text.Contains('.'))
+                    e.Handled = true; // already has a dot
+                return;
+            }
+
+            // Allow only digits
+            if (!char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
 
     }
