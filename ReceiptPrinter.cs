@@ -102,23 +102,33 @@ namespace MukeshShop
             DrawCentered(shopAddress, hindiFont);
             DrawCentered($"मो.: {mobile1}, {mobile2}", hindiFont);
             DrawCentered($"जीएसटी नंबर : {gstNo}", hindiFont);
-
-            g.DrawString("________________________________________", hindiFont, Brushes.Black, 0, y);
-            y += 20;
+            y += 10;
+            using (Pen pen = new Pen(Color.Black, 2))
+            {
+                g.DrawLine(pen, 0, y, pageWidth, y);
+            }
+            y += 10;
 
             DrawLeftRight($"बिल नं: {billNo}", $"दिनांक: {saleDate:dd-MM-yyyy}");
             g.DrawString($"ग्राहक: {customerName}", hindiBold, Brushes.Black, 10, y);
             y += 20;
             g.DrawString($"मोबाइल: {customerMobile}", hindiFont, Brushes.Black, 10, y);
-            y += 20;
+            y += 25;
 
-            g.DrawString("________________________________________", hindiFont, Brushes.Black, 0, y);
-            y += 20;
+            using (Pen pen = new Pen(Color.Black, 2))
+            {
+                g.DrawLine(pen, 0, y, pageWidth, y);
+            }
+            y += 5;
 
             g.DrawString("Item          Qty              Rate                Amount", hindiFont, Brushes.Black, 10, y);
-            y += 20;
-            g.DrawString("________________________________________", hindiFont, Brushes.Black, 0, y);
-            y += 20;
+            y += 25;
+            using (Pen pen = new Pen(Color.Black, 2))
+            {
+                g.DrawLine(pen, 0, y, pageWidth, y);
+            }
+            y += 10;
+
 
             int srNo = 1;
             foreach (var item in items)
@@ -131,15 +141,24 @@ namespace MukeshShop
                 y += 20;
                 srNo++;
             }
+            y += 15;
+            using (Pen pen = new Pen(Color.Black, 2))
+            {
+                g.DrawLine(pen, 0, y, pageWidth, y);
+            }
+            y += 10;
 
-            g.DrawString("________________________________________", hindiFont, Brushes.Black, 0, y);
-            y += 20;
             DrawLeftRight("टोटल:", $"₹{total:N2}");
             DrawLeftRight("डिस्काउंट:", $"₹{discount:N2}");
             DrawLeftRight("फाइनल टोटल:", $"₹{grandTotal:N2}");
+            y += 10;
 
-            g.DrawString("________________________________________", hindiFont, Brushes.Black, 0, y);
-            y += 20;
+            using (Pen pen = new Pen(Color.Black, 2))
+            {
+                g.DrawLine(pen, 0, y, pageWidth, y);
+            }
+            y += 10;
+
 
             DrawCentered("धन्यवाद!", hindiBold);
         }
