@@ -15,7 +15,7 @@ namespace MukeshShop
         public ucOrderList()
         {
             InitializeComponent();
-            dtpFromDate.Value = DateTime.Today.AddDays(-30);
+            dtpFromDate.Value = DateTime.Today;
             dtpToDate.Value = DateTime.Today;
         }
 
