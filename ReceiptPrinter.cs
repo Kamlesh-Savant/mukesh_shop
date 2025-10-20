@@ -9,6 +9,8 @@ namespace MukeshShop
     {
         public string Name { get; set; }
         public decimal Qty { get; set; }
+        // New property for the unit, placed after Qty
+        public string Unit { get; set; }
         public decimal Rate { get; set; }
         public decimal Amount => Qty * Rate;
     }
@@ -29,8 +31,10 @@ namespace MukeshShop
         private readonly decimal discount;
         private readonly decimal grandTotal;
 
-        private Font hindiFont = new Font("Mangal", 10);
-        private Font hindiBold = new Font("Mangal", 10, FontStyle.Bold);
+        // Fonts
+        private Font fontRegular = new Font("Segoe UI", 9);
+        private Font fontBold = new Font("Segoe UI", 9, FontStyle.Bold);
+        private Font fontHeader = new Font("Segoe UI", 11, FontStyle.Bold);
 
         public ReceiptPrinter(
             string shopName,
@@ -73,7 +77,7 @@ namespace MukeshShop
         private int CalculatePaperHeight()
         {
             int baseHeight = 350;
-            int perItemHeight = 40;
+            int perItemHeight = 45;
             return baseHeight + (items.Count * perItemHeight);
         }
 
@@ -83,6 +87,7 @@ namespace MukeshShop
             int pageWidth = e.PageBounds.Width;
             int y = 10;
 
+            // Helper methods
             void DrawCentered(string text, Font font)
             {
                 SizeF size = g.MeasureString(text, font);
@@ -90,77 +95,109 @@ namespace MukeshShop
                 y += (int)size.Height;
             }
 
-            void DrawLeftRight(string left, string right)
+            void DrawCenteredWrapped(string text, Font font, int maxWidth)
             {
-                g.DrawString(left, hindiFont, Brushes.Black, 10, y);
-                SizeF size = g.MeasureString(right, hindiFont);
-                g.DrawString(right, hindiFont, Brushes.Black, pageWidth - size.Width - 15, y);
+                RectangleF layoutRect = new RectangleF(0, y, maxWidth, 0);
+                StringFormat format = new StringFormat
+                {
+                    Alignment = StringAlignment.Center,
+                    LineAlignment = StringAlignment.Near
+                };
+                g.DrawString(text, font, Brushes.Black, layoutRect, format);
+                SizeF size = g.MeasureString(text, font, maxWidth, format);
                 y += (int)size.Height;
             }
 
-            DrawCentered(shopName, hindiBold);
-            DrawCentered(shopAddress, hindiFont);
-            DrawCentered($"मो.: {mobile1}, {mobile2}", hindiFont);
-            DrawCentered($"जीएसटी नंबर : {gstNo}", hindiFont);
-            y += 10;
-            using (Pen pen = new Pen(Color.Black, 2))
+            void DrawLeftRight(string left, string right, bool bold = false)
             {
-                g.DrawLine(pen, 0, y, pageWidth, y);
+                Font f = bold ? fontBold : fontRegular;
+                g.DrawString(left, f, Brushes.Black, 10, y);
+                SizeF size = g.MeasureString(right, f);
+                g.DrawString(right, f, Brushes.Black, pageWidth - size.Width - 15, y);
+                y += (int)size.Height;
             }
+
+            // === Shop Header ===
+            DrawCentered(shopName, fontHeader);
+            DrawCenteredWrapped(shopAddress, fontRegular, pageWidth - 20);
+            DrawCentered($"Mob.: {mobile1}, {mobile2}", fontRegular);
+            DrawCentered($"GST No. : {gstNo}", fontRegular);
+
+            y += 10;
+            g.DrawLine(Pens.Black, 0, y, pageWidth, y);
             y += 10;
 
-            DrawLeftRight($"बिल नं: {billNo}", $"दिनांक: {saleDate:dd-MM-yyyy}");
-            g.DrawString($"ग्राहक: {customerName}", hindiBold, Brushes.Black, 10, y);
+            // === Bill Info ===
+            DrawLeftRight($"Bill No: {billNo}", $"Date: {saleDate:dd-MM-yyyy}", true);
+            g.DrawString($"Customer: {customerName}", fontBold, Brushes.Black, 10, y);
             y += 20;
-            g.DrawString($"मोबाइल: {customerMobile}", hindiFont, Brushes.Black, 10, y);
+            g.DrawString($"Mobile: {customerMobile}", fontRegular, Brushes.Black, 10, y);
             y += 25;
 
-            using (Pen pen = new Pen(Color.Black, 2))
-            {
-                g.DrawLine(pen, 0, y, pageWidth, y);
-            }
+            g.DrawLine(Pens.Black, 0, y, pageWidth, y);
             y += 5;
 
-            g.DrawString("Item          Qty              Rate                Amount", hindiFont, Brushes.Black, 10, y);
-            y += 25;
-            using (Pen pen = new Pen(Color.Black, 2))
-            {
-                g.DrawLine(pen, 0, y, pageWidth, y);
-            }
+            // === Column Header ===
+            int colItemX = 10;
+            int colQtyX = 110; // Adjusted for new Unit column
+            int colUnitX = 155; // New Unit column position
+            int colRateX = 195; // Adjusted
+            int colAmountX = 250; // Adjusted
+
+            g.DrawString("Item", fontBold, Brushes.Black, colItemX, y);
+            g.DrawString("Qty", fontBold, Brushes.Black, colQtyX, y);
+            g.DrawString("Unit", fontBold, Brushes.Black, colUnitX, y); // New Column Header
+            g.DrawString("Rate", fontBold, Brushes.Black, colRateX, y);
+            g.DrawString("Amt", fontBold, Brushes.Black, colAmountX, y);
+            y += 20;
+
+            g.DrawLine(Pens.Black, 0, y, pageWidth, y);
             y += 10;
 
-
+            // === Items ===
             int srNo = 1;
+            decimal totalQty = 0;
+
             foreach (var item in items)
             {
-                g.DrawString($"{srNo}. {item.Name}", hindiFont, Brushes.Black, 10, y);
-                y += 20;
+                // First line → Item Name only
+                g.DrawString($"{srNo}. {item.Name}", fontBold, Brushes.Black, colItemX, y);
+                y += 18;
 
-                string valuesLine = string.Format("{0,12}           {1,10:N2}             {2,10:N2}", item.Qty, item.Rate, item.Amount);
-                g.DrawString("      "+valuesLine, hindiFont, Brushes.Black, 10, y);
-                y += 20;
+                // Second line → Qty, Unit, Rate, Amount aligned under headers
+                g.DrawString(item.Qty.ToString(), fontRegular, Brushes.Black, colQtyX, y);
+                g.DrawString(item.Unit, fontRegular, Brushes.Black, colUnitX, y); // New Unit value
+                g.DrawString(item.Rate.ToString("N2"), fontRegular, Brushes.Black, colRateX, y);
+                g.DrawString(item.Amount.ToString("N2"), fontRegular, Brushes.Black, colAmountX, y);
+
+                y += 22;
+
+                totalQty += item.Qty;
                 srNo++;
             }
-            y += 15;
-            using (Pen pen = new Pen(Color.Black, 2))
-            {
-                g.DrawLine(pen, 0, y, pageWidth, y);
-            }
+
+            y += 5;
+            g.DrawLine(Pens.Black, 0, y, pageWidth, y);
             y += 10;
 
-            DrawLeftRight("टोटल:", $"₹{total:N2}");
-            DrawLeftRight("डिस्काउंट:", $"₹{discount:N2}");
-            DrawLeftRight("फाइनल टोटल:", $"₹{grandTotal:N2}");
+            // === Total Qty ===
+            DrawLeftRight("Total Qty:", $"{totalQty}", true);
+            y += 5;
+
+            g.DrawLine(Pens.Black, 0, y, pageWidth, y);
             y += 10;
 
-            using (Pen pen = new Pen(Color.Black, 2))
-            {
-                g.DrawLine(pen, 0, y, pageWidth, y);
-            }
+            // === Totals ===
+            DrawLeftRight("Total:", $"₹{total:N2}", true);
+            DrawLeftRight("Disc.:", $"₹{discount:N2}", true);
+            DrawLeftRight("Grand Total:", $"₹{grandTotal:N2}", true);
+
+            y += 10;
+            g.DrawLine(Pens.Black, 0, y, pageWidth, y);
             y += 10;
 
-
-            DrawCentered("धन्यवाद!", hindiBold);
+            // === Footer ===
+            DrawCentered("Thank You", fontBold);
         }
     }
 }

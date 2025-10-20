@@ -18,3 +18,4 @@ E:\windows program\MukeshShop\obj\Debug\MukeshShop.ucSetting.resources
 E:\windows program\MukeshShop\obj\Debug\MukeshShop.ucCustomer.resources
 E:\windows program\MukeshShop\obj\Debug\MukeshShop.ucSale.resources
 E:\windows program\MukeshShop\obj\Debug\MukeshShop.ucSaleList.resources
+E:\windows program\MukeshShop\obj\Debug\MukeshShop.frmLicense.resources

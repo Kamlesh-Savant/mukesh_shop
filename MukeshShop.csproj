@@ -96,6 +96,7 @@
     <Compile Include="LicenseStorage.cs" />
     <Compile Include="MachineHelper.cs" />
     <Compile Include="Product.cs" />
+    <Compile Include="ProductSummaryPrinter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReceiptPrinter.cs" />
@@ -128,6 +129,12 @@
     </Compile>
     <Compile Include="ucSale.Designer.cs">
       <DependentUpon>ucSale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucOrderList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucOrderList.Designer.cs">
+      <DependentUpon>ucOrderList.cs</DependentUpon>
     </Compile>
     <Compile Include="ucSaleList.cs">
       <SubType>UserControl</SubType>
@@ -189,6 +196,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucSale.resx">
       <DependentUpon>ucSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucOrderList.resx">
+      <DependentUpon>ucOrderList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucSaleList.resx">
       <DependentUpon>ucSaleList.cs</DependentUpon>

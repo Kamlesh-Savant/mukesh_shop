@@ -11,6 +11,7 @@ namespace MukeshShop
         public Button BtnProducts => btnProducts;
         public Button BtnCustomers => btnCustomers;
         public Button BtnSettings => btnSettings;
+        public Button BtnOrderList => btnOrderList;
         public Button BtnLogout => btnLogout;
 
         public ucSidebar()

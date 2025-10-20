@@ -15,6 +15,7 @@ namespace MukeshShop
             ucSidebar1.BtnSettings.Click += (s, e) => LoadControl(new ucSetting());
             ucSidebar1.BtnProducts.Click += (s, e) => ShowProductList();
             ucSidebar1.BtnSales.Click += (s, e) => ShowSaleList();
+            ucSidebar1.BtnOrderList.Click += (s, e) => LoadControl(new ucOrderList());
         }
 
         private void frmDashboard_Load(object sender, EventArgs e)

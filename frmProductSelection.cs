@@ -32,7 +32,7 @@ namespace MukeshShop
         {
             try
             {
-                productsTable = DB.GetData("SELECT ID, pName, pRate FROM tblProduct WHERE isActive = 1 ORDER BY pName");
+                productsTable = DB.GetData("SELECT ID, pName, pUnit, pRate FROM tblProduct WHERE isActive = 1 ORDER BY pName");
                 dgvProducts.DataSource = productsTable;
             }
             catch (Exception ex)
@@ -59,6 +59,14 @@ namespace MukeshShop
                 DataPropertyName = "pName",
                 HeaderText = "Product Name",
                 Width = 250,
+                ReadOnly = true
+            });
+            dgvProducts.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "colUnit",
+                DataPropertyName = "pUnit",
+                HeaderText = "Unit",
+                Width = 200,
                 ReadOnly = true
             });
 
@@ -105,6 +113,7 @@ namespace MukeshShop
                     {
                         Id = Convert.ToInt32(row.Cells["colId"].Value),
                         Name = row.Cells["colName"].Value.ToString(),
+                        Unit = row.Cells["colUnit"].Value.ToString(),
                         Rate = Convert.ToDecimal(row.Cells["colRate"].Value)
                     });
                 }

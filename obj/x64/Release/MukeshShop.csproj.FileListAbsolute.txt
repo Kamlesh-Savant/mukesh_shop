@@ -18,3 +18,4 @@ E:\windows program\MukeshShop\obj\x64\Release\MukeshShop.csproj.GenerateResource
 E:\windows program\MukeshShop\obj\x64\Release\MukeshShop.csproj.CoreCompileInputs.cache
 E:\windows program\MukeshShop\obj\x64\Release\MukeshShop.exe
 E:\windows program\MukeshShop\obj\x64\Release\MukeshShop.pdb
+E:\windows program\MukeshShop\obj\x64\Release\MukeshShop.frmLicense.resources

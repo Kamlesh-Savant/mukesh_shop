@@ -166,8 +166,8 @@
             this.cmbUnit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbUnit.Font = new System.Drawing.Font("Segoe UI", 14.25F);
             this.cmbUnit.Items.AddRange(new object[] {
-            "पट्टी",
-            "नंग"});
+            "Ladi",
+            "Unit"});
             this.cmbUnit.Location = new System.Drawing.Point(5, 5);
             this.cmbUnit.Name = "cmbUnit";
             this.cmbUnit.Size = new System.Drawing.Size(328, 33);

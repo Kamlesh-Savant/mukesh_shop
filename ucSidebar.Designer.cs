@@ -13,6 +13,7 @@ namespace MukeshShop
         private System.Windows.Forms.Button btnCustomers;
         private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Button btnOrderList;
         private System.Windows.Forms.Label lblLogo;
 
 
@@ -34,6 +35,7 @@ namespace MukeshShop
             this.btnSales = new System.Windows.Forms.Button();
             this.btnDashboard = new System.Windows.Forms.Button();
             this.lblLogo = new System.Windows.Forms.Label();
+            this.btnOrderList = new System.Windows.Forms.Button();
             this.panelSidebar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,6 +44,7 @@ namespace MukeshShop
             this.panelSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(30)))), ((int)(((byte)(84)))));
             this.panelSidebar.Controls.Add(this.btnLogout);
             this.panelSidebar.Controls.Add(this.btnSettings);
+            this.panelSidebar.Controls.Add(this.btnOrderList);
             this.panelSidebar.Controls.Add(this.btnCustomers);
             this.panelSidebar.Controls.Add(this.btnProducts);
             this.panelSidebar.Controls.Add(this.btnSales);
@@ -76,13 +79,28 @@ namespace MukeshShop
             this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettings.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnSettings.ForeColor = System.Drawing.Color.White;
-            this.btnSettings.Location = new System.Drawing.Point(0, 300);
+            this.btnSettings.Location = new System.Drawing.Point(0, 350);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnSettings.Size = new System.Drawing.Size(220, 50);
-            this.btnSettings.TabIndex = 4;
+            this.btnSettings.TabIndex = 5;
             this.btnSettings.Text = "Profile";
             this.btnSettings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnOrderList
+            // 
+            this.btnOrderList.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnOrderList.FlatAppearance.BorderSize = 0;
+            this.btnOrderList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOrderList.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnOrderList.ForeColor = System.Drawing.Color.White;
+            this.btnOrderList.Location = new System.Drawing.Point(0, 300);
+            this.btnOrderList.Name = "btnOrderList";
+            this.btnOrderList.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnOrderList.Size = new System.Drawing.Size(220, 50);
+            this.btnOrderList.TabIndex = 4;
+            this.btnOrderList.Text = "Order List";
+            this.btnOrderList.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnCustomers
             // 
@@ -156,6 +174,7 @@ namespace MukeshShop
             this.lblLogo.TabIndex = 5;
             this.lblLogo.Text = "   MUKESH SHOP";
             this.lblLogo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            
             // 
             // ucSidebar
             // 
@@ -167,5 +186,6 @@ namespace MukeshShop
 
         }
 
+       
     }
 }

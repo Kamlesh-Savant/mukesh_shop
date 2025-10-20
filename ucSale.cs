@@ -39,6 +39,7 @@ namespace MukeshShop
             productsTable.Columns.Add("ID", typeof(int));
             productsTable.Columns.Add("Product", typeof(string));
             productsTable.Columns.Add("Quantity", typeof(decimal));
+            productsTable.Columns.Add("Unit", typeof(string));
             productsTable.Columns.Add("Rate", typeof(decimal));
             productsTable.Columns.Add("Amount", typeof(decimal));
         }
@@ -129,11 +130,13 @@ namespace MukeshShop
             {
                 productsTable.Rows.Clear();
 
-                string query = @"SELECT p.ID, p.pName AS Product, si.Quantity, si.Rate, 
-                                (si.Quantity * si.Rate) AS Amount
-                                FROM tblSaleItems si
-                                INNER JOIN tblProduct p ON si.pId = p.ID
-                                WHERE si.sId = ?";
+                // --- FIX IS HERE ---
+                string query = @"SELECT p.ID, p.pName AS Product, si.Quantity, p.pUnit AS Unit, si.Rate,  
+                         (si.Quantity * si.Rate) AS Amount
+                         FROM tblSaleItems si
+                         INNER JOIN tblProduct p ON si.pId = p.ID
+                         WHERE si.sId = ?";
+                // ---------------------
 
                 var parameters = new OleDbParameter[] { DB.CreateParameter("sId", saleId, OleDbType.Integer) };
                 DataTable items = DB.GetData(query, parameters);
@@ -213,7 +216,16 @@ namespace MukeshShop
                 Name = "colQuantity",
                 DataPropertyName = "Quantity",
                 HeaderText = "Quantity",
-                Width = 100
+                Width = 70
+            });
+
+            dgvProducts.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "colUnit",
+                DataPropertyName = "Unit",
+                HeaderText = "Unit",
+                Width = 100,
+                ReadOnly = true
             });
 
             dgvProducts.Columns.Add(new DataGridViewTextBoxColumn
@@ -255,6 +267,7 @@ namespace MukeshShop
                             row["ID"] = product.Id;
                             row["Product"] = product.Name;
                             row["Quantity"] = 1;
+                            row["Unit"] = product.Unit;
                             row["Rate"] = product.Rate;
                             row["Amount"] = product.Rate;
                             productsTable.Rows.Add(row);
@@ -300,6 +313,8 @@ namespace MukeshShop
                     total += amt;
             }
             txtTotal.Text = total.ToString("N2");
+
+
             CalculateGrandTotal();
         }
 
@@ -308,7 +323,8 @@ namespace MukeshShop
             if (decimal.TryParse(txtTotal.Text, out decimal total) &&
                 decimal.TryParse(txtDiscount.Text, out decimal discount))
             {
-                txtGrandTotal.Text = (total - discount).ToString("N2");
+                txtGrandTotal.Text = Math.Round(total - discount).ToString("N2");
+
             }
         }
 
@@ -474,6 +490,7 @@ namespace MukeshShop
                     {
                         Name = row.Cells["colProduct"].Value.ToString(),
                         Qty = Convert.ToDecimal(row.Cells["colQuantity"].Value),
+                        Unit = row.Cells["colUnit"].Value.ToString(),
                         Rate = Convert.ToDecimal(row.Cells["colRate"].Value)
                     });
                 }

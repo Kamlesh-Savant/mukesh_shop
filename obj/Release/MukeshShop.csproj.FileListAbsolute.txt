@@ -1,8 +1,8 @@
 E:\windows program\MukeshShop\bin\Release\MukeshShop.exe.config
 E:\windows program\MukeshShop\bin\Release\MukeshShop.exe
 E:\windows program\MukeshShop\bin\Release\MukeshShop.pdb
-E:\windows program\MukeshShop\obj\Release\MukeshShop.csprojAssemblyReference.cache
 E:\windows program\MukeshShop\obj\Release\MukeshShop.frmDashboard.resources
+E:\windows program\MukeshShop\obj\Release\MukeshShop.frmLicense.resources
 E:\windows program\MukeshShop\obj\Release\MukeshShop.frmLogin.resources
 E:\windows program\MukeshShop\obj\Release\MukeshShop.Properties.Resources.resources
 E:\windows program\MukeshShop\obj\Release\MukeshShop.ucCustomer.resources
@@ -18,4 +18,5 @@ E:\windows program\MukeshShop\obj\Release\MukeshShop.csproj.GenerateResource.cac
 E:\windows program\MukeshShop\obj\Release\MukeshShop.csproj.CoreCompileInputs.cache
 E:\windows program\MukeshShop\obj\Release\MukeshShop.exe
 E:\windows program\MukeshShop\obj\Release\MukeshShop.pdb
-E:\windows program\MukeshShop\obj\Release\MukeshShop.frmLicense.resources
+E:\windows program\MukeshShop\obj\Release\MukeshShop.csprojAssemblyReference.cache
+E:\windows program\MukeshShop\obj\Release\MukeshShop.ucOrderList.resources
